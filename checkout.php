@@ -111,17 +111,21 @@ $user = getCurrentUser();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оформлення замовлення - Інтернет-магазин</title>
+    <title>Оформлення замовлення - <?= SITE_NAME ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <i class="bi bi-shop"></i> Інтернет-Магазин
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.php">
+                <img src="assets/images/logo.png" alt="<?= SITE_NAME ?>" style="height: 40px; margin-right: 12px;">
+                <div>
+                    <span style="font-size: 1.3rem;"><?= SITE_NAME ?></span>
+                    <small class="d-block" style="font-size: 0.65rem; opacity: 0.75; margin-top: -3px;"><?= SITE_SLOGAN ?></small>
+                </div>
             </a>
         </div>
     </nav>
@@ -138,7 +142,7 @@ $user = getCurrentUser();
                                 <h2 class="mt-4">Замовлення оформлено!</h2>
                                 <p class="text-muted">Дякуємо за покупку. Ми зв'яжемося з вами найближчим часом.</p>
                                 <div class="d-grid gap-2 mt-4">
-                                    <a href="orders.php" class="btn btn-primary">
+                                    <a href="orders.php" class="btn btn-warning">
                                         <i class="bi bi-list-ul"></i> Мої замовлення
                                     </a>
                                     <a href="index.php" class="btn btn-outline-secondary">
@@ -198,7 +202,7 @@ $user = getCurrentUser();
                                     </div>
 
                                     <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-primary btn-lg">
+                                        <button type="submit" class="btn btn-warning btn-lg">
                                             <i class="bi bi-check-circle"></i> Підтвердити замовлення
                                         </button>
                                         <a href="cart.php" class="btn btn-outline-secondary">
@@ -239,7 +243,7 @@ $user = getCurrentUser();
 
                                 <div class="d-flex justify-content-between">
                                     <strong>До сплати:</strong>
-                                    <strong class="text-primary h4"><?= number_format($total, 2) ?> ₴</strong>
+                                    <strong class="text-warning h4"><?= number_format($total, 2) ?> ₴</strong>
                                 </div>
                             </div>
                         </div>
@@ -248,6 +252,25 @@ $user = getCurrentUser();
             <?php endif; ?>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+                        <h5 class="mb-0"><?= SITE_NAME ?></h5>
+                    </div>
+                    <p class="text-muted small"><?= SITE_SLOGAN ?></p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-1 small">© 2024 <?= SITE_NAME ?>. Всі права захищені</p>
+                    <p class="text-muted small">Курсова робота з дисципліни "Веб-технології"</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -35,71 +35,74 @@ $relatedProducts = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($product['name']) ?> - Інтернет-магазин</title>
+    <title><?= e($product['name']) ?> - <?= SITE_NAME ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="<?= SITE_URL ?>/index.php">
-            <i class="bi bi-shop-window"></i> <?= SITE_NAME ?>
-            <small class="d-block" style="font-size: 0.6rem; opacity: 0.7;"><?= SITE_SLOGAN ?></small>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php">
-                        <i class="bi bi-house"></i> Головна
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.php">
-                        <i class="bi bi-cart3"></i> Кошик
-                        <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
-                            <span class="badge bg-danger"><?= count($_SESSION['cart']) ?></span>
-                        <?php endif; ?>
-                    </a>
-                </li>
-                <?php if (isLoggedIn()): ?>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.php">
+                <img src="assets/images/logo.png" alt="<?= SITE_NAME ?>" style="height: 40px; margin-right: 12px;">
+                <div>
+                    <span style="font-size: 1.3rem;"><?= SITE_NAME ?></span>
+                    <small class="d-block" style="font-size: 0.65rem; opacity: 0.75; margin-top: -3px;"><?= SITE_SLOGAN ?></small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="orders.php">
-                            <i class="bi bi-list-ul"></i> Замовлення
+                        <a class="nav-link" href="index.php">
+                            <i class="bi bi-house"></i> Головна
                         </a>
                     </li>
-                    <?php if (isAdmin()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.php">
+                            <i class="bi bi-cart3"></i> Кошик
+                            <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+                                <span class="badge bg-danger"><?= count($_SESSION['cart']) ?></span>
+                            <?php endif; ?>
+                        </a>
+                    </li>
+                    <?php if (isLoggedIn()): ?>
                         <li class="nav-item">
-                            <a class="nav-link text-warning" href="admin/index.php">
-                                <i class="bi bi-gear"></i> Адмін
+                            <a class="nav-link" href="orders.php">
+                                <i class="bi bi-list-ul"></i> Замовлення
+                            </a>
+                        </li>
+                        <?php if (isAdmin()): ?>
+                            <li class="nav-item">
+                                <a class="nav-link text-warning" href="admin/index.php">
+                                    <i class="bi bi-gear"></i> Адмін
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">
+                                <i class="bi bi-box-arrow-right"></i> Вихід (<?= e($_SESSION['user_name']) ?>)
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">
+                                <i class="bi bi-box-arrow-in-right"></i> Вхід
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="register.php">
+                                <i class="bi bi-person-plus"></i> Реєстрація
                             </a>
                         </li>
                     <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">
-                            <i class="bi bi-box-arrow-right"></i> Вихід
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">
-                            <i class="bi bi-box-arrow-in-right"></i> Вхід
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.php">
-                            <i class="bi bi-person-plus"></i> Реєстрація
-                        </a>
-                    </li>
-                <?php endif; ?>
-            </ul>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Breadcrumb -->
     <div class="container mt-4">
@@ -128,11 +131,11 @@ $relatedProducts = $stmt->fetchAll();
 
                 <!-- Product Info -->
                 <div class="col-md-6">
-                    <span class="badge bg-secondary mb-2"><?= e($product['category_name']) ?></span>
+                    <span class="badge bg-dark mb-2"><?= e($product['category_name']) ?></span>
                     <h1 class="display-5 mb-3"><?= e($product['name']) ?></h1>
                     
                     <div class="mb-4">
-                        <span class="h2 text-primary"><?= number_format($product['price'], 2) ?> ₴</span>
+                        <span class="h2 text-warning"><?= number_format($product['price'], 2) ?> ₴</span>
                     </div>
 
                     <div class="mb-4">
@@ -165,7 +168,7 @@ $relatedProducts = $stmt->fetchAll();
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary btn-lg" id="addToCartBtn" data-id="<?= $product['id'] ?>">
+                            <button class="btn btn-warning btn-lg" id="addToCartBtn" data-id="<?= $product['id'] ?>">
                                 <i class="bi bi-cart-plus"></i> Додати до кошика
                             </button>
                             <a href="index.php" class="btn btn-outline-secondary">
@@ -200,8 +203,8 @@ $relatedProducts = $stmt->fetchAll();
                                      onerror="this.src='https://via.placeholder.com/300x200?text=<?= urlencode($related['name']) ?>'">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= e($related['name']) ?></h5>
-                                    <p class="text-primary fw-bold"><?= number_format($related['price'], 2) ?> ₴</p>
-                                    <a href="product.php?id=<?= $related['id'] ?>" class="btn btn-outline-primary btn-sm">
+                                    <p class="text-warning fw-bold"><?= number_format($related['price'], 2) ?> ₴</p>
+                                    <a href="product.php?id=<?= $related['id'] ?>" class="btn btn-outline-dark btn-sm">
                                         Переглянути
                                     </a>
                                 </div>
@@ -218,11 +221,15 @@ $relatedProducts = $stmt->fetchAll();
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Інтернет-магазин</h5>
-                    <p class="text-muted">Якісні товари за доступними цінами</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+                        <h5 class="mb-0"><?= SITE_NAME ?></h5>
+                    </div>
+                    <p class="text-muted small"><?= SITE_SLOGAN ?></p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p class="text-muted mb-0">© 2024 Всі права захищені</p>
+                    <p class="text-muted mb-1 small">© 2024 <?= SITE_NAME ?>. Всі права захищені</p>
+                    <p class="text-muted small">Курсова робота з дисципліни "Веб-технології"</p>
                 </div>
             </div>
         </div>
