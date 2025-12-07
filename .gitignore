@@ -1,0 +1,50 @@
+# Конфігураційні файли 
+# config.php
+
+# Завантажені файли
+uploads/*
+!uploads/.htaccess
+!uploads/placeholder.jpg
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+error_log
+access_log
+
+# Тимчасові файли
+*.tmp
+*.temp
+*.swp
+*~
+
+# Бекапи
+*.bak
+*.backup
+backup/
+
+# Composer 
+vendor/
+composer.lock
+
+# Node modules 
+node_modules/
+package-lock.json
+
+# Env файли
+.env
+.env.local
+
+# Кеш
+cache/
+*.cache
